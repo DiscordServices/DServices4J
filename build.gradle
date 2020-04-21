@@ -1,0 +1,132 @@
+plugins{
+    id 'com.jfrog.bintray' version '1.8.5'
+    id 'java'
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+    id 'maven'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+def ver = new Version(major: 1, minor: 0, revision: 0)
+
+group = 'net.discordservices'
+version = "$ver"
+
+java{
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories{
+    mavenCentral()
+    jcenter()
+}
+
+jar{
+    getArchiveFileName().set("DServices4J.jar")
+}
+
+dependencies{
+    api group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.5.0'
+    api group: 'org.json', name: 'json', version: '20190722'
+    api group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
+    api(group: 'net.dv8tion', name: 'JDA', version: '4.1.1_136'){
+        exclude(module: 'opus-java')
+    }
+    api group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.8.0'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes){
+    getArchiveClassifier().set("sources")
+    from(sourceSets.main.allSource)
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc){
+    getArchiveClassifier().set("javadoc")
+    from(javadoc.destinationDir)
+}
+
+artifacts{
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+    archives shadowJar
+}
+
+javadoc{
+    source = sourceSets.main.allJava
+    destinationDir = file("$projectDir/docs")
+    options.encoding = 'UTF-8'
+    options.memberLevel = JavadocMemberLevel.PROTECTED
+    
+    if(options instanceof StandardJavadocDocletOptions){
+        def opt = options as StandardJavadocDocletOptions
+
+        opt.links(
+                "https://stleary.github.io/JSON-java/",
+                "https://ci.dv8tion.net/job/JDA/javadoc/",
+                "https://docs.oracle.com/javase/8/docs/api/"
+        )
+        
+        if(JavaVersion.current().isJava9Compatible()){
+            opt.addBooleanOption("html5", true)
+            opt.addStringOption("-release", "8")
+        }
+        
+        if(JavaVersion.current().isJava11Compatible()){
+            opt.addBooleanOption("-no-module-directories", true)
+        }
+    }
+}
+
+build{
+    dependsOn(jar)
+    dependsOn(javadocJar)
+    dependsOn(sourcesJar)
+    dependsOn(shadowJar)
+}
+
+bintray{
+    user = System.getenv("BintrayUser")
+    key = System.getenv("BintrayApiKey")
+    publications = ['BintrayRelease']
+    
+    pkg{
+        repo = 'maven'
+        name = 'DServices4J'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/DiscordServices/DServices4J'
+        version{
+            name = project.version
+            released = new Date()
+            vcsTag = System.getenv("VcsTag")
+        }
+    }
+}
+
+publishing{
+    publications{
+        BintrayRelease(MavenPublication){
+            from(components.java)
+            groupId group
+            artifactId archivesBaseName
+            version version
+
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+class Version{
+    String major, minor, revision
+
+    static String getBuild(){
+        System.getenv("BUILD_NUMBER") ? "_" + System.getenv("BUILD_NUMBER") :
+                System.getProperty("BUILD_NUMBER") ? "_" + System.getProperty("BUILD_NUMBER") : ""
+    }
+
+    String toString(){
+        "$major.$minor.${revision}$build"
+    }
+}
