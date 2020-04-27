@@ -12,7 +12,8 @@ It is used to set the API token and to access the various API endpoints.
 To get an instance of it, just do this:  
 ```java
 String token = /* API token */
-DServices4J instance = new DServices4J(token);
+String id = /* Bot id */
+DServices4J instance = new DServices4J(token, id);
 ```
 
 ### Commands
