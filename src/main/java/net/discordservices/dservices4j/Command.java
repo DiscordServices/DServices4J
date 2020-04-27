@@ -2,13 +2,17 @@ package net.discordservices.dservices4j;
 
 import org.json.JSONObject;
 
+/**
+ * Class used for posting Command information (name, description and category) to the Discordservices API.
+ */
 public class Command{
     
-    private final String TOKEN;
+    private final String TOKEN, id;
     private JSONObject json;
     
-    Command(String token){
+    Command(String token, String id){
         this.TOKEN = token;
+        this.id = id;
         this.json = new JSONObject();
     }
     
@@ -76,15 +80,38 @@ public class Command{
             throw new NullPointerException("Command list may not be empty.");
     }
     
+    /**
+     * Class used for the {@link net.discordservices.dservices4j.Command#addCommand(CommandInfo) addCommand(...)} methods.
+     * <br>You set the name, description and category through the constructors.
+     * 
+     * <p>Note that the description and category can be set to {@code null}, which makes them default to the following values:
+     * <br><ul>
+     *     <li>{@code description} defaults to an empty String ({@code ""})</li>
+     *     <li>{@code category} defaults to {@code null} (Which is treated as All on the API)</li>
+     * </ul>
+     */
     public static class CommandInfo{
         
-        private String name = "";
-        private String description = "";
-        private String category = "";
-        
+        private final String name;
+        private final String description;
+        private final String category;
+    
+        /**
+         * Constructor to set the CommandInfo instance, which will be used in the addCommand options.
+         * <br>Note that you can provide {@code null} for description and category and it will default to specific values.
+         * 
+         * @param name
+         *        Name of the command. Can't be null.
+         * @param description
+         *        Description of the command. Can be set to {@code null} for no description.
+         * @param category
+         *        Category of the command. Can be set to {@code null} for category All.
+         */
         public CommandInfo(String name, String description, String category){
+            Checks.check((name != null) && (!name.isEmpty()), "Command name may not be empty nor null.");
+            
             this.name = name;
-            this.description = description;
+            this.description = description == null ? "" : description;
             this.category = category;
         }
         

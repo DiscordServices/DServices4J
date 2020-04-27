@@ -20,6 +20,26 @@ DServices4J has a `Command` class to set the commands of your bot and posting th
 
 To get an instance, first create a [DServices4J instance](#dservices4j-class) and then use the `getCommand()` method.  
 ```java
-// instance is out DServices4J instance.
+// instance is our DServices4J class.
 Command command = instance.getCommand();
+```
+
+### Stats
+The `Stats` class is the main class to post your bot's statistic with.  
+As of now does the class offer `postStats(long)` for Guilds and a single shard and `postStats(long, long)` for Guilds with multiple shards.
+
+To get an instance, first create a [DServices4J instance](#dservices4j-class) and the use the `getStats()` method.  
+```java
+// instance is our DServices4J class.
+Stats stats = instance.getStats();
+```
+
+### News
+The `News` class is used to post announcements about your bot.  
+These announcements can be both normal or error/issue ones.
+
+To get an instance, first create a [DServices4J instance](#dservices4j-class) and the use the `getNews()` method.  
+```java
+// instance is our DServices4J class.
+News news = instance.getNews();
 ```

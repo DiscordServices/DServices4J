@@ -11,16 +11,14 @@ public class RequestHandler{
     private final String BASE_URL = "https://api.discordservices.net/bot/";
     private final OkHttpClient CLIENT = new OkHttpClient();
     
-    void postStats(String id, long count) throws IOException{
-        String url = BASE_URL + id + "/stats";
-    
-        JSONObject json = new JSONObject()
-                .put("count", count);
+    public void post(String endpoint, String id, String token, JSONObject json) throws IOException{
+        String url = BASE_URL + id + endpoint;
         
         RequestBody body = RequestBody.create(json.toString(), null);
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("Content-Type", "application/json")
+                .addHeader("Authentication", token)
                 .post(body)
                 .build();
         
