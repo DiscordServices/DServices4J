@@ -27,7 +27,13 @@ public class Stats{
      * 
      * <p>Use {@link #postStats(long, long) postStats(long, long)} if you also want to provide the shards.
      *
-     * <p>Note that this might throw a {@link java.io.IOException IOException} on a not successfull POST.
+     * <p>This method can throw the following exceptions from the POST request:
+     * <br><ul>
+     *     <li>{@link java.io.IOException IOException}
+     *     <br>When the request wasn't successfull.</li>
+     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
+     *     <br>When the Bot got rate limited by the site.</li>
+     * </ul>
      * 
      * @param server
      *        Amount of servers your bot is in.
@@ -39,8 +45,14 @@ public class Stats{
     /**
      * Performs a POST request towards the Stats endpoint.
      * <br>This will post the provided servers with the provided shards.
-     * 
-     * <p>Note that this might throw a {@link java.io.IOException IOException} on a not successfull POST.
+     *
+     * <p>This method can throw the following exceptions from the POST request:
+     * <br><ul>
+     *     <li>{@link java.io.IOException IOException}
+     *     <br>When the request wasn't successfull.</li>
+     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
+     *     <br>When the Bot got rate limited by the site.</li>
+     * </ul>
      * 
      * @param server
      *        Amount of servers your bot is in.
@@ -52,7 +64,7 @@ public class Stats{
             .put("shards", shards);
         
         try{
-            REQUEST_HANDLER.post("stats", id, TOKEN, json);
+            REQUEST_HANDLER.postStats(id, TOKEN, json);
         }catch(IOException ex){
             ex.printStackTrace();
         }

@@ -26,21 +26,33 @@ public class News{
      * <br>The posts made with this method will never be seen as errors. Use {@link #postNews(String, String, boolean) postNews(String, String, true)}
      * if you want to send an Error message.
      *
-     * <p>Note that this might throw a {@link java.io.IOException IOException} on a not successfull POST.
+     * <p>This method can throw the following exceptions from the POST request:
+     * <br><ul>
+     *     <li>{@link java.io.IOException IOException}
+     *     <br>When the request wasn't successfull.</li>
+     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
+     *     <br>When the Bot got rate limited by the site.</li>
+     * </ul>
      *
      * @param title
      *        The title of the News post.
      * @param message
      *        The message of the news.
      */
-    public void postNes(String title, String message){
+    public void postNews(String title, String message){
         postNews(title, message, false);
     }
     
     /**
      * Posts news to the bot page.
      *
-     * <p>Note that this might throw a {@link java.io.IOException IOException} on a not successfull POST.
+     * <p>This method can throw the following exceptions from the POST request:
+     * <br><ul>
+     *     <li>{@link java.io.IOException IOException}
+     *     <br>When the request wasn't successfull.</li>
+     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
+     *     <br>When the Bot got rate limited by the site.</li>
+     * </ul>
      * 
      * @param title
      *        The title of the News post.
@@ -55,7 +67,7 @@ public class News{
             .put("error", isError);
         
         try{
-            REQUEST_HANDLER.post("news", id, TOKEN, json);
+            REQUEST_HANDLER.postNews(id, TOKEN, json);
         }catch(IOException ex){
             ex.printStackTrace();
         }

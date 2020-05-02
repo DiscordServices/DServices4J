@@ -7,7 +7,7 @@ public class DServices4J{
     private Stats stats = null;
     private News news = null;
     
-    public DServices4J(String token, String id){
+    DServices4J(String token, String id){
         this.TOKEN = token;
         this.id = id;
     }
