@@ -11,20 +11,20 @@ import java.util.List;
 /**
  * Class used for posting Command information (name, description and category) to the Discordservices API.
  */
-public class Command{
+public class Commands {
     
     private final String TOKEN, id;
     private JSONArray json;
     private final RequestHandler REQUEST_HANDLER = new RequestHandler();
     
-    Command(String token, String id){
+    Commands(String token, String id){
         this.TOKEN = token;
         this.id = id;
         this.json = new JSONArray();
     }
     
     /**
-     * Adds a command to the list using a {@link net.discordservices.dservices4j.Command.CommandInfo CommandInfo}
+     * Adds a command to the list using a {@link net.discordservices.dservices4j.Commands.CommandInfo CommandInfo}
      * instance.
      * 
      * @param  command
@@ -32,7 +32,7 @@ public class Command{
      *         
      * @return This class after the command was added. Useful for chaining.
      */
-    public Command addCommand(CommandInfo command){
+    public Commands addCommand(CommandInfo command){
         JSONObject cmdJson = new JSONObject()
                 .put("command", command.getName())
                 .put("description", command.getDescription())
@@ -43,7 +43,7 @@ public class Command{
     }
     
     /**
-     * Adds the provided commands to the list using the provided {@link net.discordservices.dservices4j.Command.CommandInfo CommandInfo}
+     * Adds the provided commands to the list using the provided {@link net.discordservices.dservices4j.Commands.CommandInfo CommandInfo}
      * instances.
      * 
      * @param  commands
@@ -51,12 +51,12 @@ public class Command{
      *         
      * @return This class after the command was added. Useful for chaining.
      */
-    public Command addCommands(CommandInfo... commands){
+    public Commands addCommands(CommandInfo... commands){
         return addCommands(Arrays.asList(commands));
     }
 
     /**
-     * Adds the provided commands to the list using the provided List of {@link net.discordservices.dservices4j.Command.CommandInfo CommandInfo}
+     * Adds the provided commands to the list using the provided List of {@link net.discordservices.dservices4j.Commands.CommandInfo CommandInfo}
      * instances.
      *
      * @param  commands
@@ -64,7 +64,7 @@ public class Command{
      *
      * @return This class after the command was added. Useful for chaining.
      */
-    public Command addCommands(List<CommandInfo> commands){
+    public Commands addCommands(List<CommandInfo> commands){
         for(CommandInfo command : commands)
             addCommand(command);
 
@@ -72,7 +72,7 @@ public class Command{
     }
     
     /**
-     * Sets the provided commands for the list using the provided {@link net.discordservices.dservices4j.Command.CommandInfo CommandInfo}
+     * Sets the provided commands for the list using the provided {@link net.discordservices.dservices4j.Commands.CommandInfo CommandInfo}
      * instances.
      * <br><b>This will remove all previously set commands!</b>
      * 
@@ -81,14 +81,14 @@ public class Command{
      *         
      * @return This class after the commands were set. Useful for chaining.
      */
-    public Command setCommands(CommandInfo... commands){
+    public Commands setCommands(CommandInfo... commands){
         json = new JSONArray();
         
         return addCommands(commands);
     }
 
     /**
-     * Sets the provided commands for the list using the provided List of {@link net.discordservices.dservices4j.Command.CommandInfo CommandInfo}
+     * Sets the provided commands for the list using the provided List of {@link net.discordservices.dservices4j.Commands.CommandInfo CommandInfo}
      * instances.
      * <br><b>This will remove all previously set commands!</b>
      *
@@ -97,7 +97,7 @@ public class Command{
      *
      * @return This class after the commands were set. Useful for chaining.
      */
-    public Command setCommands(List<CommandInfo> commands){
+    public Commands setCommands(List<CommandInfo> commands){
         json = new JSONArray();
         
         return addCommands(commands);
@@ -129,7 +129,7 @@ public class Command{
     }
     
     /**
-     * Class used for the {@link net.discordservices.dservices4j.Command#addCommand(CommandInfo) addCommand(...)} methods.
+     * Class used for the {@link net.discordservices.dservices4j.Commands#addCommand(CommandInfo) addCommand(...)} methods.
      * <br>You set the name, description and category through the constructors.
      * 
      * <p>Note that the description and category can be set to {@code null}, which makes them default to the following values:

@@ -3,7 +3,7 @@ package net.discordservices.dservices4j;
 public class DServices4J{
     
     private final String TOKEN, id;
-    private Command command = null;
+    private Commands commands = null;
     private Stats stats = null;
     private News news = null;
     
@@ -13,7 +13,7 @@ public class DServices4J{
     }
     
     /**
-     * Gets an instance of the {@link net.discordservices.dservices4j.Command Command} class, which is used to submit
+     * Gets an instance of the {@link net.discordservices.dservices4j.Commands Command} class, which is used to submit
      * the commands a bot has to the Discordservices API.
      * 
      * <p>This method is used to create instances of the Command class, or load it, when already created.
@@ -22,13 +22,13 @@ public class DServices4J{
      * Command command = new DServices4J(API_TOKEN, ID).getCommand();
      * }</pre>
      * 
-     * @return Usable instance of the {@link net.discordservices.dservices4j.Command Command} class.
+     * @return Usable instance of the {@link net.discordservices.dservices4j.Commands Command} class.
      */
-    public Command getCommand(){
-        if(command != null)
-            return command;
+    public Commands getCommand(){
+        if(commands != null)
+            return commands;
         
-        return (command = new Command(TOKEN, id));
+        return (commands = new Commands(TOKEN, id));
     }
     
     /**

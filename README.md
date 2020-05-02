@@ -1,9 +1,48 @@
+[bintray]: https://bintray.com/andre601/maven/DServices4J
+[badge]: https://api.bintray.com/packages/andre601/maven/DServices4J/images/download.svg
+
 ## DServices4J
 DServices4J is the official Java library for the Discordservices.net API.  
 It supports all GET and POST APIs of the site.
 
 ### Download
-Coming soon.
+> Latest Release:  
+> [![badge]][bintray]
+
+You can use the latest version (displayed) above by using either Maven or Gradle for your project.  
+Alternatively can you also download the individual jar-files from the GitHub releases.
+
+#### Gradle
+Please replace `{version}` with the above displayed version:  
+```groovy
+repositories{
+  jcenter()
+}
+
+dependencies{
+  implementation 'net.discordservices:DServices4J:{version}'
+}
+```
+
+#### Maven
+Please replace `{version}` with the above displayed version:  
+```xml
+<repositories>
+  <repository>
+    <id>Bintray</id>
+    <url>https://jcenter.bintray.com</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>net.discordservices</groupId>
+    <artifactId>DServices4J</artifactId>
+    <version>{version}</version>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+```
 
 ### DServices4J Class
 The DServices4J class is the main class for everything.  
