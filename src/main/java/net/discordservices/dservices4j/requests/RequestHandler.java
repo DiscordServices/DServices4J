@@ -34,15 +34,6 @@ public class RequestHandler{
                 .build();
 
         try(Response response = CLIENT.newCall(request).execute()){
-            ResponseBody responseBody = response.body();
-
-            if(responseBody == null)
-                throw new NullPointerException("Received empty Response body.");
-
-            String bodyString = responseBody.string();
-            if(bodyString.isEmpty())
-                throw new NullPointerException("Received empty Response body.");
-
             if(!response.isSuccessful()){
                 if(response.code() == 429)
                     throw new RatelimitedException();
