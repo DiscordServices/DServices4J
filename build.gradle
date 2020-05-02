@@ -109,8 +109,8 @@ publishing{
             artifactId archivesBaseName
             version version
 
-            artifact javadocJar
-            artifact sourcesJar
+            artifact(javadocJar)
+            artifact(sourcesJar)
         }
     }
 }

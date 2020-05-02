@@ -18,8 +18,8 @@ jobs:
     - name: Publish (Bintray)
       id: publish_bintray
       env:
-        BintrayUser: ${{ secrets.bintrayUsername }}
-        BintrayApiKey: ${{ secrets.bintrayApiKey }}
+        BintrayUser: ${{ secrets.BintrayUsername }}
+        BintrayApiKey: ${{ secrets.BintrayApiKey }}
         VcsTag: ${{ github.event.release.tag_name }}
       run: ./gradlew bintrayUpload
     - name: Zip files
