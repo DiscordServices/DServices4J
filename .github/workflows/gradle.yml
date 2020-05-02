@@ -1,0 +1,32 @@
+name: Publication task
+
+on:
+  release:
+    types: [published]
+    branches:
+    - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Publish (Bintray)
+      id: publish_bintray
+      env:
+        BintrayUser: ${{ secrets.bintrayUsername }}
+        BintrayApiKey: ${{ secrets.bintrayApiKey }}
+        VcsTag: ${{ github.event.release.tag_name }}
+      run: ./gradlew bintrayUpload
+    - name: Zip files
+      working-directory: ./build/libs
+      run: zip DServices4J-${{ github.event.release.tag_name }}.zip *.jar
+    - name: Upload to release
+      uses: AButler/upload-release-assets@v2.0
+      with:
+        files: 'build/libs/DServices4J-${{ github.event.release.tag_name }}.zip;build/libs/*.jar'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
