@@ -24,8 +24,6 @@ public class RequestHandler{
     
     private void post(String endpoint, String id, String token, String json) throws IOException, RatelimitedException{
         String url = "https://api.discordservices.net/bot/" + id + "/" + endpoint;
-    
-        System.out.println(json);
         
         RequestBody body = RequestBody.create(json, null);
         Request request = new Request.Builder()
