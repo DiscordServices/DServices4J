@@ -1,5 +1,6 @@
 package net.discordservices.dservices4j;
 
+import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.discordservices.dservices4j.requests.RequestHandler;
 import org.json.JSONObject;
 
@@ -38,7 +39,7 @@ public class Stats{
      * @param server
      *        Amount of servers your bot is in.
      */
-    public void postStats(long server){
+    public void postStats(long server) throws IOException, RatelimitedException{
         postStats(server, 1);
     }
     
@@ -59,14 +60,10 @@ public class Stats{
      * @param shards
      *        Amount of shards your bot is in.
      */
-    public void postStats(long server, long shards){
+    public void postStats(long server, long shards) throws IOException, RatelimitedException{
         json.put("servers", server)
             .put("shards", shards);
         
-        try{
-            REQUEST_HANDLER.postStats(id, TOKEN, json);
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }
+        REQUEST_HANDLER.postStats(id, TOKEN, json);
     }
 }

@@ -10,21 +10,23 @@ import java.io.IOException;
 public class RequestHandler{
     private final OkHttpClient CLIENT = new OkHttpClient();
     
-    public void postNews(String id, String token, JSONObject json) throws IOException{
+    public void postNews(String id, String token, JSONObject json) throws IOException, RatelimitedException{
         post("news", id, token, json.toString());
     }
     
-    public void postStats(String id, String token, JSONObject json) throws IOException{
+    public void postStats(String id, String token, JSONObject json) throws IOException, RatelimitedException{
         post("stats", id, token, json.toString());
     }
     
-    public void postCommands(String id, String token, JSONArray json) throws IOException{
+    public void postCommands(String id, String token, JSONArray json) throws IOException, RatelimitedException{
         post("commands", id, token, json.toString());
     }
     
-    private void post(String endpoint, String id, String token, String json) throws IOException{
+    private void post(String endpoint, String id, String token, String json) throws IOException, RatelimitedException{
         String url = "https://api.discordservices.net/bot/" + id + endpoint;
-
+    
+        System.out.println(json);
+        
         RequestBody body = RequestBody.create(json, null);
         Request request = new Request.Builder()
                 .url(url)

@@ -1,5 +1,6 @@
 package net.discordservices.dservices4j;
 
+import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.discordservices.dservices4j.requests.RequestHandler;
 import org.json.JSONObject;
 
@@ -39,7 +40,7 @@ public class News{
      * @param message
      *        The message of the news.
      */
-    public void postNews(String title, String message){
+    public void postNews(String title, String message) throws IOException, RatelimitedException{
         postNews(title, message, false);
     }
     
@@ -61,15 +62,11 @@ public class News{
      * @param isError
      *        If the post should be treated as an error/issue.
      */
-    public void postNews(String title, String message, boolean isError){
+    public void postNews(String title, String message, boolean isError) throws IOException, RatelimitedException{
         json.put("title", title)
             .put("content", message)
             .put("error", isError);
         
-        try{
-            REQUEST_HANDLER.postNews(id, TOKEN, json);
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }
+        REQUEST_HANDLER.postNews(id, TOKEN, json);
     }
 }

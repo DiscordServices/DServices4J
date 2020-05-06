@@ -1,5 +1,6 @@
 package net.discordservices.dservices4j;
 
+import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.discordservices.dservices4j.requests.RequestHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -117,15 +118,11 @@ public class Commands {
      * @throws java.lang.NullPointerException
      *         When no command was previously set.
      */
-    public void postCommands(){
+    public void postCommands() throws IOException, RatelimitedException{
         if(json.isEmpty())
             throw new NullPointerException("Command list may not be empty.");
         
-        try {
-            REQUEST_HANDLER.postCommands(id, TOKEN, json);
-        }catch(IOException ex){
-            ex.printStackTrace();
-        }
+        REQUEST_HANDLER.postCommands(id, TOKEN, json);
     }
     
     /**
