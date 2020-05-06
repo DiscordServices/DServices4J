@@ -36,7 +36,7 @@ public class Commands {
     public Commands addCommand(CommandInfo command){
         JSONObject cmdJson = new JSONObject()
                 .put("command", command.getName())
-                .put("description", command.getDescription())
+                .put("desc", command.getDescription())
                 .put("category", command.getCategory());
         json.put(cmdJson);
         
