@@ -56,12 +56,12 @@ DServices4J instance = new DServices4J(token, id);
 ```
 
 ### Commands
-DServices4J has a `Command` class to set the commands of your bot and posting them to the corresponding API.
+DServices4J has a `Commands` class to set the commands of your bot and posting them to the corresponding API.
 
-To get an instance, first create a [DServices4J instance](#dservices4j-class) and then use the `getCommand()` method.  
+To get an instance, first create a [DServices4J instance](#dservices4j-class) and then use the `getCommands()` method.  
 ```java
 // instance is our DServices4J class.
-Command command = instance.getCommand();
+Command command = instance.getCommands();
 ```
 
 ### Stats

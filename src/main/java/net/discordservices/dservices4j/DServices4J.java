@@ -24,7 +24,7 @@ public class DServices4J{
      * 
      * @return Usable instance of the {@link net.discordservices.dservices4j.Commands Command} class.
      */
-    public Commands getCommand(){
+    public Commands getCommands(){
         if(commands != null)
             return commands;
         
