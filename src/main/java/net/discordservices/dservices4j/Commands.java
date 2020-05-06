@@ -107,16 +107,12 @@ public class Commands {
     /**
      * Posts the previously set commands to the Discordservices API.
      * 
-     * <p>This method can throw the following exceptions from the POST request:
-     * <br><ul>
-     *     <li>{@link java.io.IOException IOException}
-     *     <br>When the request wasn't successfull.</li>
-     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
-     *     <br>When the Bot got rate limited by the site.</li>
-     * </ul>
-     * 
      * @throws java.lang.NullPointerException
      *         When no command was previously set.
+     * @throws java.io.IOException
+     *         When the request wasn't successfull.
+     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
+     *         When the Wrapper got rate limited by the API.
      */
     public void postCommands() throws IOException, RatelimitedException{
         if(json.isEmpty())

@@ -27,18 +27,15 @@ public class News{
      * <br>The posts made with this method will never be seen as errors. Use {@link #postNews(String, String, boolean) postNews(String, String, true)}
      * if you want to send an Error message.
      *
-     * <p>This method can throw the following exceptions from the POST request:
-     * <br><ul>
-     *     <li>{@link java.io.IOException IOException}
-     *     <br>When the request wasn't successfull.</li>
-     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
-     *     <br>When the Bot got rate limited by the site.</li>
-     * </ul>
-     *
      * @param title
      *        The title of the News post.
      * @param message
      *        The message of the news.
+     *
+     * @throws java.io.IOException
+     *         When the request wasn't successfull.
+     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
+     *         When the Wrapper got rate limited by the API.
      */
     public void postNews(String title, String message) throws IOException, RatelimitedException{
         postNews(title, message, false);
@@ -46,14 +43,6 @@ public class News{
     
     /**
      * Posts news to the bot page.
-     *
-     * <p>This method can throw the following exceptions from the POST request:
-     * <br><ul>
-     *     <li>{@link java.io.IOException IOException}
-     *     <br>When the request wasn't successfull.</li>
-     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
-     *     <br>When the Bot got rate limited by the site.</li>
-     * </ul>
      * 
      * @param title
      *        The title of the News post.
@@ -61,6 +50,11 @@ public class News{
      *        The message of the news.
      * @param isError
      *        If the post should be treated as an error/issue.
+     *
+     * @throws java.io.IOException
+     *         When the request wasn't successfull.
+     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
+     *         When the Wrapper got rate limited by the API.
      */
     public void postNews(String title, String message, boolean isError) throws IOException, RatelimitedException{
         json.put("title", title)

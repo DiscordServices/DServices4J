@@ -27,17 +27,14 @@ public class Stats{
      * <br>This will post the provided servers with shards being set to {@code 1}.
      * 
      * <p>Use {@link #postStats(long, long) postStats(long, long)} if you also want to provide the shards.
-     *
-     * <p>This method can throw the following exceptions from the POST request:
-     * <br><ul>
-     *     <li>{@link java.io.IOException IOException}
-     *     <br>When the request wasn't successfull.</li>
-     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
-     *     <br>When the Bot got rate limited by the site.</li>
-     * </ul>
      * 
      * @param server
      *        Amount of servers your bot is in.
+     *
+     * @throws java.io.IOException
+     *         When the request wasn't successfull.
+     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
+     *         When the Wrapper got rate limited by the API.
      */
     public void postStats(long server) throws IOException, RatelimitedException{
         postStats(server, 1);
@@ -46,19 +43,16 @@ public class Stats{
     /**
      * Performs a POST request towards the Stats endpoint.
      * <br>This will post the provided servers with the provided shards.
-     *
-     * <p>This method can throw the following exceptions from the POST request:
-     * <br><ul>
-     *     <li>{@link java.io.IOException IOException}
-     *     <br>When the request wasn't successfull.</li>
-     *     <li>{@link net.discordservices.dservices4j.exceptions.RatelimitedException RatelimitedException}
-     *     <br>When the Bot got rate limited by the site.</li>
-     * </ul>
      * 
      * @param server
      *        Amount of servers your bot is in.
      * @param shards
      *        Amount of shards your bot is in.
+     * 
+     * @throws java.io.IOException
+     *         When the request wasn't successfull.
+     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
+     *         When the Wrapper got rate limited by the API.
      */
     public void postStats(long server, long shards) throws IOException, RatelimitedException{
         json.put("servers", server)
