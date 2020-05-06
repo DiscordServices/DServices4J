@@ -31,7 +31,7 @@ public class RequestHandler{
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authentication", token)
+                .addHeader("Authorization", token)
                 .post(body)
                 .build();
 
