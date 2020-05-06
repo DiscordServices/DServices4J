@@ -38,7 +38,7 @@ public class Commands {
                 .put("command", command.getName())
                 .put("description", command.getDescription())
                 .put("category", command.getCategory());
-        json.put(command);
+        json.put(cmdJson);
         
         return this;
     }
