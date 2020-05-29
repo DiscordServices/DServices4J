@@ -33,6 +33,7 @@ public class RequestHandler{
         if(cache.getIfPresent(endpoint) != null)
             return;
         
+        cache.put(endpoint, json);
         String url = "https://api.discordservices.net/bot/" + id + "/" + endpoint;
         
         RequestBody body = RequestBody.create(json, null);
