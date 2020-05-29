@@ -107,6 +107,9 @@ public class Commands {
     /**
      * Posts the previously set commands to the Discordservices API.
      * 
+     * <p><b>Rate limits</b>
+     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
+     * 
      * @throws java.lang.NullPointerException
      *         When no command was previously set.
      * @throws java.io.IOException

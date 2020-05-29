@@ -27,6 +27,9 @@ public class Stats{
      * <br>This will post the provided servers with shards being set to {@code 1}.
      * 
      * <p>Use {@link #postStats(long, long) postStats(long, long)} if you also want to provide the shards.
+     *
+     * <p><b>Rate limits</b>
+     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
      * 
      * @param server
      *        Amount of servers your bot is in.
@@ -43,6 +46,9 @@ public class Stats{
     /**
      * Performs a POST request towards the Stats endpoint.
      * <br>This will post the provided servers with the provided shards.
+     *
+     * <p><b>Rate limits</b>
+     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
      * 
      * @param server
      *        Amount of servers your bot is in.

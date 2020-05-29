@@ -27,6 +27,9 @@ public class News{
      * <br>The posts made with this method will never be seen as errors. Use {@link #postNews(String, String, boolean) postNews(String, String, true)}
      * if you want to send an Error message.
      *
+     * <p><b>Rate limits</b>
+     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
+     *
      * @param title
      *        The title of the News post.
      * @param message
@@ -43,6 +46,9 @@ public class News{
     
     /**
      * Posts news to the bot page.
+     *
+     * <p><b>Rate limits</b>
+     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
      * 
      * @param title
      *        The title of the News post.
