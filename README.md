@@ -66,7 +66,7 @@ DServices4J has a `Commands` class to set the commands of your bot and posting t
 To get an instance, first create a [DServices4J instance](#dservices4j-class) and then use the `getCommands()` method.  
 ```java
 // instance is our DServices4J class.
-Command command = instance.getCommands();
+Commands commands = instance.getCommands();
 ```
 
 ## Stats Class
