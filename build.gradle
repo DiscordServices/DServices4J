@@ -74,6 +74,8 @@ javadoc{
             opt.addBooleanOption("-no-module-directories", true)
         }
     }
+    
+    exclude("net/discordservices/dservices4j/Checks.java")
 }
 
 build{
