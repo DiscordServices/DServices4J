@@ -1,5 +1,31 @@
+/*
+ * Copyright 2020 - 2021 Andre601
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package net.discordservices.dservices4j;
 
+/**
+ * Main class used for the Java Wrapper.
+ * <br>To perform any actions with this Wrapper will you need to get an instance of this class using the
+ * {@link net.discordservices.dservices4j.DServices4J.Builder nested Builder class}.
+ * 
+ * <p>After obtaining a Instance of this class can you use the different getter methods to get instances of the
+ * {@link #getCommands() Commands}, {@link #getNews() News} or {@link #getStats() Stats} classes.
+ */
 public class DServices4J{
     
     private final String TOKEN, id;
@@ -32,25 +58,6 @@ public class DServices4J{
     }
     
     /**
-     * Gets an instance of the {@link net.discordservices.dservices4j.Stats Stats} class, which is used to submit statistics
-     * like server and shard count to the Discordservices API.
-     * 
-     * <p>This method is used to create an instance of the Stats class, or load it, when already created.
-     * <br>Example:
-     * <br><pre>{@code
-     * Stats stats = new DServices4J(API_TOKEN, ID).getStats();
-     * }</pre>
-     * 
-     * @return Usable instance of the {@link net.discordservices.dservices4j.Stats Stats} class.
-     */
-    public Stats getStats(){
-        if(stats != null)
-            return stats;
-        
-        return (stats = new Stats(TOKEN, id));
-    }
-    
-    /**
      * Gets an instance of the {@link net.discordservices.dservices4j.News News} class, which is used to post announcements
      * about your bot.
      *
@@ -67,6 +74,25 @@ public class DServices4J{
             return news;
         
         return (news = new News(TOKEN, id));
+    }
+    
+    /**
+     * Gets an instance of the {@link net.discordservices.dservices4j.Stats Stats} class, which is used to submit statistics
+     * like server and shard count to the Discordservices API.
+     * 
+     * <p>This method is used to create an instance of the Stats class, or load it, when already created.
+     * <br>Example:
+     * <br><pre>{@code
+     * Stats stats = new DServices4J(API_TOKEN, ID).getStats();
+     * }</pre>
+     * 
+     * @return Usable instance of the {@link net.discordservices.dservices4j.Stats Stats} class.
+     */
+    public Stats getStats(){
+        if(stats != null)
+            return stats;
+        
+        return (stats = new Stats(TOKEN, id));
     }
     
     /**

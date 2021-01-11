@@ -1,18 +1,34 @@
+/*
+ * Copyright 2020 - 2021 Andre601
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package net.discordservices.dservices4j;
 
-import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.discordservices.dservices4j.requests.RequestHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Class used for posting Command information (name, description and category) to the Discordservices API.
  */
-public class Commands {
+public class Commands{
     
     private final String TOKEN, id;
     private JSONArray json;
@@ -107,17 +123,14 @@ public class Commands {
     /**
      * Posts the previously set commands to the Discordservices API.
      * 
-     * <p><b>Rate limits</b>
-     * <br>This method only performs a request every 5 seconds and othewhise does nothing.
+     * <h2>Rate Limits</h2>
+     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      * 
      * @throws java.lang.NullPointerException
      *         When no command was previously set.
-     * @throws java.io.IOException
-     *         When the request wasn't successfull.
-     * @throws net.discordservices.dservices4j.exceptions.RatelimitedException
-     *         When the Wrapper got rate limited by the API.
      */
-    public void postCommands() throws IOException, RatelimitedException{
+    public void postCommands(){
         if(json.isEmpty())
             throw new NullPointerException("Command list may not be empty.");
         
