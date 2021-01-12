@@ -75,7 +75,10 @@ javadoc{
         }
     }
     
-    exclude("net/discordservices/dservices4j/Checks.java")
+    exclude(
+            "net/discordservices/dservices4j/Checks.java",
+            "net/discordservices/dservices4j/requests"
+    )
 }
 
 build{
