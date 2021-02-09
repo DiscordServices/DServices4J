@@ -96,7 +96,7 @@ publishing {
 
             from components.java
             artifact javadocJar
-            artifact sourceJar
+            artifact sourcesJar
         }
     }
     repositories {
