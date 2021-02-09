@@ -1,5 +1,5 @@
-[bintray]: https://bintray.com/andre601/maven/DServices4J
-[badge]: https://api.bintray.com/packages/andre601/maven/DServices4J/images/download.svg
+[bintray]: https://ci.codemc.io/job/DiscordServices/job/DServices4J/lastSuccessfulBuild/
+[badge]: https://img.shields.io/nexus/maven-public/net.discordservices/dservices4j?label=Release&server=https%3A%2F%2Frepo.codemc.io&style=plastic
 
 [Discord]: https://discord.gg/cpmXFsz
 
@@ -21,11 +21,11 @@ Alternatively can you also download the individual jar-files from the GitHub rel
 Please replace `{version}` with the above displayed version:  
 ```groovy
 repositories{
-  jcenter()
+  maven{ url = 'https://repo.codemc.io/repository/maven-public' }
 }
 
 dependencies{
-  implementation 'net.discordservices:DServices4J:{version}'
+  implementation 'net.discordservices:dservices4j:{version}'
 }
 ```
 
@@ -34,15 +34,15 @@ Please replace `{version}` with the above displayed version:
 ```xml
 <repositories>
   <repository>
-    <id>Bintray</id>
-    <url>https://jcenter.bintray.com</url>
+    <id>codemc</id>
+    <url>https://repo.codemc.io/repository/maven-public</url>
   </repository>
 </repositories>
 
 <dependencies>
   <dependency>
     <groupId>net.discordservices</groupId>
-    <artifactId>DServices4J</artifactId>
+    <artifactId>dservices4j</artifactId>
     <version>{version}</version>
     <scope>provided</scope>
   </dependency>
