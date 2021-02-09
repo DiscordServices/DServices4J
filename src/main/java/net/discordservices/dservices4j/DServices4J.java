@@ -29,6 +29,7 @@ package net.discordservices.dservices4j;
 public class DServices4J{
     
     private final String TOKEN, id;
+    
     private Commands commands = null;
     private Stats stats = null;
     private News news = null;
@@ -43,10 +44,13 @@ public class DServices4J{
      * the commands a bot has to the Discordservices API.
      * 
      * <p>This method is used to create instances of the Command class, or load it, when already created.
-     * <br>Example:
-     * <br><pre>{@code
-     * Command command = new DServices4J(API_TOKEN, ID).getCommand();
-     * }</pre>
+     * 
+     * <h2>Example</h2>
+     * <pre><code>
+     * DServices4J dservices = new DServices4J(API_TOKEN, ID);
+     * 
+     * Command command = dservices.getCommands();
+     * </code></pre>
      * 
      * @return Usable instance of the {@link net.discordservices.dservices4j.Commands Command} class.
      */
@@ -62,10 +66,13 @@ public class DServices4J{
      * about your bot.
      *
      * <p>This method is used to create an instance of the News class, or load it, when already created.
-     * <br>Example:
-     * <br><pre>{@code
-     * News news = new DServices4J(API_TOKEN, ID).getNews();
-     * }</pre>
+     *
+     * <h2>Example</h2>
+     * <pre><code>
+     * DServices4J dservices = new DServices4J(API_TOKEN, ID);
+     *
+     * News news = dservices.getNews();
+     * </code></pre>
      *
      * @return Usable instance of the {@link net.discordservices.dservices4j.Stats Stats} class.
      */
@@ -81,10 +88,13 @@ public class DServices4J{
      * like server and shard count to the Discordservices API.
      * 
      * <p>This method is used to create an instance of the Stats class, or load it, when already created.
-     * <br>Example:
-     * <br><pre>{@code
-     * Stats stats = new DServices4J(API_TOKEN, ID).getStats();
-     * }</pre>
+     *
+     * <h2>Example</h2>
+     * <pre><code>
+     * DServices4J dservices = new DServices4J(API_TOKEN, ID);
+     *
+     * Stats stats = dservices.getStats();
+     * </code></pre>
      * 
      * @return Usable instance of the {@link net.discordservices.dservices4j.Stats Stats} class.
      */
@@ -101,8 +111,6 @@ public class DServices4J{
     public static class Builder{
         private String token = null;
         private String id = null;
-        
-        public Builder(){}
     
         /**
          * Sets the API token (This is NOT your Bot token!) to use for the various endpoints.

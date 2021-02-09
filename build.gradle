@@ -1,5 +1,4 @@
 plugins{
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'java'
     id 'java-library'
     id 'idea'
@@ -88,34 +87,33 @@ build{
     dependsOn(shadowJar)
 }
 
-bintray{
-    user = System.getenv("BintrayUser")
-    key = System.getenv("BintrayApiKey")
-    publications = ['BintrayRelease']
-    
-    pkg{
-        repo = 'maven'
-        name = 'DServices4J'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/DiscordServices/DServices4J'
-        version{
-            name = project.version
-            released = new Date()
-            vcsTag = System.getenv("VcsTag")
-        }
-    }
-}
-
-publishing{
-    publications{
-        BintrayRelease(MavenPublication){
-            from(components.java)
-            groupId group
-            artifactId archivesBaseName
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = group
+            artifactId = "dservices4j"
             version version
 
-            artifact(javadocJar)
-            artifact(sourcesJar)
+            from components.java
+            artifact javadocJar
+            artifact sourceJar
+        }
+    }
+    repositories {
+        maven {
+            url = "https://repo.codemc.io/repository/maven-releases/"
+
+            def mavenUsername = System.getenv("ORG_GRADLE_PROJECT_mavenUsername") ? System.getenv("ORG_GRADLE_PROJECT_mavenUsername") :
+                    System.getProperty("ORG_GRADLE_PROJECT_mavenUsername") ? System.getProperty("ORG_GRADLE_PROJECT_mavenUsername") : null
+            def mavenPassword = System.getenv("ORG_GRADLE_PROJECT_mavenPassword") ? System.getenv("ORG_GRADLE_PROJECT_mavenPassword") :
+                    System.getProperty("ORG_GRADLE_PROJECT_mavenPassword") ? System.getProperty("ORG_GRADLE_PROJECT_mavenPassword") : null
+
+            if(mavenUsername != null && mavenPassword != null) {
+                credentials {
+                    username = mavenUsername
+                    password = mavenPassword
+                }
+            }
         }
     }
 }
