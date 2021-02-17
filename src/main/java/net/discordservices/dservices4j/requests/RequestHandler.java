@@ -37,7 +37,7 @@ public class RequestHandler{
     private final OkHttpClient CLIENT = new OkHttpClient();
     
     private final Cache<String, String> cache = Caffeine.newBuilder()
-            .expireAfterWrite(5, TimeUnit.SECONDS)
+            .expireAfterWrite(5, TimeUnit.MINUTES)
             .build();
     
     private final Map<String, Long> lastRequest = new HashMap<>();
