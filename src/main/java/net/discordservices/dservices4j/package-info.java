@@ -19,17 +19,17 @@
 /**
  * <h1>Installation</h1>
  * <p>Please replace {@code API_VERSION} with the latest version you can find on the
- * <a href="https://github.com/DiscordServices/DServices4J/releases/latest" target="_blank">GitHub Releases Page</a>.
+ * <a href="https://github.com/DiscordServices/DServices4J/blob/development/README.md" target="_blank">GitHub README.md</a>.
  * 
  * <h2>Gradle (recommended)</h2>
  *
  * <pre><code>
  * repositories{
- *     maven{ url = 'https://dl.bintray.com/andre601/maven' }
+ *     maven{ url = 'https://repo.codemc.io/repository/maven-public' }
  * }
  *
  * dependencies{
- *     compile 'net.discordservices:DServices4J:API_VERSION'
+ *     compile 'net.discordservices:dservices4j:API_VERSION'
  * }
  * </code></pre>
  *
@@ -40,14 +40,14 @@
  *     <repository>
  *         <id>jcenter</id>
  *         <name>jcenter-bintray</name>
- *         <url>https://dl.bintray.com/andre601/maven</url>
+ *         <url>https://repo.codemc.io/repository/maven-public</url>
  *     </repository>
  * </repositories>
  *
  * <dependencies>
  *     <dependency>
  *         <groupId>net.discordservices</groupId>
- *         <artifactId>DServices4J</artifactId>
+ *         <artifactId>dservices4j</artifactId>
  *         <version>API_VERSION</version>
  *     </dependency>
  * </dependencies>
@@ -57,9 +57,8 @@
  * We do not recommend using jar files directly and instead use one of the above dependency management systems.
  *
  * <p>If you still want to do it manually, or can't use one of the other option, head over to the
- * <a target="_blank" href="https://github.com/DiscordServices/DServices4J/releases/latest">GitHub releases page</a> or to
- * the <a target="_blank" href="https://bintray.com/beta/#/andre601/maven/DServices4J?tab=overview">Bintray release page</a>
- * and download the jar files from there.
+ * <a target="_blank" href="https://github.com/DiscordServices/DServices4J/releases/latest">GitHub releases page</a> and
+ * download the jar files from there.
  *
  * <p>Note that you will not receive any support when using this method.
  * 
@@ -80,7 +79,9 @@
  * // Get Commands instance
  * Commands commands = dservices.getCommands();
  * 
- * // Add command
+ * // Add a command to the list.
+ * // The CommandInfo class can be either CommandInfo(name, description, category) or
+ * // CommandInfo(name, null, category) for no description.
  * commands.addCommand(new CommandInfo("vote", "Let's you vote for the bot", "info"));
  * 
  * // Post commands

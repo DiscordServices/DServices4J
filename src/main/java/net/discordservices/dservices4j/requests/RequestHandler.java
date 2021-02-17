@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RequestHandler{
@@ -37,6 +39,8 @@ public class RequestHandler{
     private final Cache<String, String> cache = Caffeine.newBuilder()
             .expireAfterWrite(5, TimeUnit.SECONDS)
             .build();
+    
+    private final Map<String, Long> lastRequest = new HashMap<>();
     
     public void postNews(String id, String token, JSONObject json){
         try{
@@ -70,7 +74,10 @@ public class RequestHandler{
     
     private void post(String endpoint, String id, String token, String json) throws IOException, RatelimitedException{
         if(cache.getIfPresent(endpoint) != null){
-            LOG.info("Denied POST request towards /bot/{}/{}! Please wait at least 5 Minutes between requests!", id, endpoint);
+            long remaining = getRemainingTime(endpoint);
+            
+            LOG.warn("Denied POST request towards /bot/{}/{}!", id, endpoint);
+            LOG.warn("Please wait another {} minutes before performing another request!", remaining);
             return;
         }
         
@@ -92,10 +99,23 @@ public class RequestHandler{
 
                 throw new IOException("Received non-successful response. (" + response.code() + " " + response.message() + ")");
             }
+            
+            lastRequest.put(endpoint, System.currentTimeMillis());
         }
     }
     
     private String getErrorMsg(String id, String endpoint){
         return "There was an IOException while performing a POST request towards /bot/" + id + "/" + endpoint;
+    }
+    
+    private long getRemainingTime(String endpoint){
+        long time = System.currentTimeMillis();
+        long timeRequest = lastRequest.get(endpoint);
+        if(time > timeRequest)
+            return 0L;
+        
+        long timePassed = TimeUnit.MILLISECONDS.toMinutes(time - timeRequest);
+        
+        return 5L - timePassed;
     }
 }

@@ -139,7 +139,7 @@ public class Commands{
     
     /**
      * Class used for the {@link net.discordservices.dservices4j.Commands#addCommand(CommandInfo) addCommand(...)} methods.
-     * <br>You set the name, description and category through the constructors.
+     * <br>You set the name, description and category through the constructor.
      * 
      * <p>Note that the description and category can be set to {@code null}, which makes them default to the following values:
      * <br><ul>
@@ -155,7 +155,10 @@ public class Commands{
     
         /**
          * Constructor to set the CommandInfo instance, which will be used in the addCommand options.
-         * <br>Note that you can provide {@code null} for description and category and it will default to specific values.
+         * 
+         * <p>You can provide {@code null} for the description and category to use their respective default value.
+         * <br>A null description is equal to using an empty String and a null category will be treated as category being
+         * {@code all}.
          * 
          * @param name
          *        Name of the command. Can't be null.
@@ -163,6 +166,12 @@ public class Commands{
          *        Description of the command. Can be set to {@code null} for no description.
          * @param category
          *        Category of the command. Can be set to {@code null} for category All.
+         * 
+         * @see net.discordservices.dservices4j.Commands#addCommand(CommandInfo)
+         * @see net.discordservices.dservices4j.Commands#addCommands(CommandInfo...)
+         * @see net.discordservices.dservices4j.Commands#addCommands(List)
+         * @see net.discordservices.dservices4j.Commands#setCommands(CommandInfo...)
+         * @see net.discordservices.dservices4j.Commands#setCommands(List)
          */
         public CommandInfo(String name, String description, String category){
             Checks.check((name != null) && (!name.isEmpty()), "Command name may not be empty nor null.");

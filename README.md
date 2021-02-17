@@ -55,9 +55,12 @@ It is used to set the API token and to access the various API endpoints.
 
 To get an instance of it, just do this:  
 ```java
-String token = /* API token */
-String id = /* Bot id */
-DServices4J instance = new DServices4J(token, id);
+String token = /* Your Discord Services API token */
+String id = /* The ID of your Bot */
+DServices4J instance = new DServices4J().Builder()
+        .setToken(token)
+        .setId(id)
+        .build();
 ```
 
 ## Commands Class
