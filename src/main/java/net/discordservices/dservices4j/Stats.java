@@ -44,7 +44,7 @@ public class Stats{
      * <p>Use {@link #postStats(long, long) postStats(long, long)} if you also want to provide the shards.
      *
      * <h2>Rate Limits</h2>
-     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <p>By default will the Wrapper only perform one request per 15 seconds per endpoint.
      * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      * 
      * @param server
@@ -59,7 +59,7 @@ public class Stats{
      * <br>This will post the provided servers with the provided shards.
      *
      * <h2>Rate Limits</h2>
-     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <p>By default will the Wrapper only perform one request per 15 seconds per endpoint.
      * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      * 
      * @param server
