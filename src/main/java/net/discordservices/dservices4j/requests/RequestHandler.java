@@ -37,7 +37,7 @@ public class RequestHandler{
     private final OkHttpClient CLIENT = new OkHttpClient();
     
     private final Cache<String, String> cache = Caffeine.newBuilder()
-            .expireAfterWrite(5, TimeUnit.MINUTES)
+            .expireAfterWrite(15, TimeUnit.SECONDS)
             .build();
     
     private final Map<String, Long> lastRequest = new HashMap<>();
@@ -77,7 +77,7 @@ public class RequestHandler{
             long remaining = getRemainingTime(endpoint);
             
             LOG.warn("Denied POST request towards /bot/{}/{}!", id, endpoint);
-            LOG.warn("Please wait another {} minutes before performing another request!", remaining);
+            LOG.warn("Please wait another {} seconds before performing another request!", remaining);
             return;
         }
         
@@ -114,8 +114,8 @@ public class RequestHandler{
         if(time > timeRequest)
             return 0L;
         
-        long timePassed = TimeUnit.MILLISECONDS.toMinutes(time - timeRequest);
+        long timePassed = TimeUnit.MILLISECONDS.toSeconds(time - timeRequest);
         
-        return 5L - timePassed;
+        return 15L - timePassed;
     }
 }
