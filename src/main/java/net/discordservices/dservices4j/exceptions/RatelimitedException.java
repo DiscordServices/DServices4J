@@ -25,14 +25,6 @@ package net.discordservices.dservices4j.exceptions;
  */
 public class RatelimitedException extends Exception{
     
-    /**
-     * @deprecated If you used this Constructor for whatever reason should you switch to {@code RatelimitedException(String, String)}.
-     */
-    @Deprecated
-    public RatelimitedException(){
-        this("UNKNOWN", "NaN");
-    }
-    
     public RatelimitedException(String route, String id){
         super("Got Rate limited on /bot/" + id + "/" + route);
     }
