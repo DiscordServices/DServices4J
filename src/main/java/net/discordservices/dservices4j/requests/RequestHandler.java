@@ -28,19 +28,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RequestHandler{
     private final Logger LOG = LoggerFactory.getLogger("DServices4J RequestHandler");
     private final OkHttpClient CLIENT = new OkHttpClient();
     
-    private final Cache<String, String> cache = Caffeine.newBuilder()
-            .expireAfterWrite(5, TimeUnit.MINUTES)
+    private final Cache<String, Long> cache = Caffeine.newBuilder()
+            .expireAfterWrite(15, TimeUnit.SECONDS)
             .build();
-    
-    private final Map<String, Long> lastRequest = new HashMap<>();
     
     public void postNews(String id, String token, JSONObject json){
         try{
@@ -77,11 +73,10 @@ public class RequestHandler{
             long remaining = getRemainingTime(endpoint);
             
             LOG.warn("Denied POST request towards /bot/{}/{}!", id, endpoint);
-            LOG.warn("Please wait another {} minutes before performing another request!", remaining);
+            LOG.warn("Please wait another {} seconds before performing another request!", remaining);
             return;
         }
         
-        cache.put(endpoint, json);
         String url = "https://api.discordservices.net/bot/" + id + "/" + endpoint;
         
         RequestBody body = RequestBody.create(json, null);
@@ -91,16 +86,15 @@ public class RequestHandler{
                 .addHeader("Authorization", token)
                 .post(body)
                 .build();
-
+    
+        cache.put(endpoint, System.currentTimeMillis());
         try(Response response = CLIENT.newCall(request).execute()){
             if(!response.isSuccessful()){
                 if(response.code() == 429)
                     throw new RatelimitedException(endpoint, id);
-
+                
                 throw new IOException("Received non-successful response. (" + response.code() + " " + response.message() + ")");
             }
-            
-            lastRequest.put(endpoint, System.currentTimeMillis());
         }
     }
     
@@ -110,12 +104,15 @@ public class RequestHandler{
     
     private long getRemainingTime(String endpoint){
         long time = System.currentTimeMillis();
-        long timeRequest = lastRequest.get(endpoint);
+        Long timeRequest = cache.getIfPresent(endpoint);
+        if(timeRequest == null)
+            return 0L;
+        
         if(time > timeRequest)
             return 0L;
         
-        long timePassed = TimeUnit.MILLISECONDS.toMinutes(time - timeRequest);
+        long timePassed = TimeUnit.MILLISECONDS.toSeconds(time - timeRequest);
         
-        return 5L - timePassed;
+        return 15L - timePassed;
     }
 }
