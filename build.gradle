@@ -7,7 +7,7 @@ plugins{
     id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
-def ver = new Version(major: 1, minor: 3, revision: 0)
+def ver = new Version(major: 1, minor: 3, revision: 1)
 
 group = 'net.discordservices'
 version = "$ver"
@@ -18,7 +18,6 @@ java{
 
 repositories{
     mavenCentral()
-    jcenter()
 }
 
 jar{

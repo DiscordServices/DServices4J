@@ -44,7 +44,7 @@ public class RequestHandler{
         }catch(IOException ex){
             LOG.warn(getErrorMsg(id, "news"), ex);
         }catch(RatelimitedException ex){
-            LOG.warn("Received RatelimitedException!", ex);
+            LOG.warn("DServices4J was rate limited!", ex);
         }
     }
     
@@ -54,7 +54,7 @@ public class RequestHandler{
         }catch(IOException ex){
             LOG.warn(getErrorMsg(id, "stats"), ex);
         }catch(RatelimitedException ex){
-            LOG.warn("Received RatelimitedException!", ex);
+            LOG.warn("DServices4J was rate limited!", ex);
         }
     }
     
@@ -64,7 +64,7 @@ public class RequestHandler{
         }catch(IOException ex){
             LOG.warn(getErrorMsg(id, "commands"), ex);
         }catch(RatelimitedException ex){
-            LOG.warn("Received RatelimitedException!", ex);
+            LOG.warn("DServices4J was rate limited!", ex);
         }
     }
     
@@ -82,6 +82,7 @@ public class RequestHandler{
         RequestBody body = RequestBody.create(json, null);
         Request request = new Request.Builder()
                 .url(url)
+                .addHeader("User-Agent", "DServices4J")
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", token)
                 .post(body)
@@ -93,7 +94,7 @@ public class RequestHandler{
                 if(response.code() == 429)
                     throw new RatelimitedException(endpoint, id);
                 
-                throw new IOException("Received non-successful response. (" + response.code() + " " + response.message() + ")");
+                throw new IOException("IOException");
             }
         }
     }
@@ -108,10 +109,9 @@ public class RequestHandler{
         if(timeRequest == null)
             return 0L;
         
-        if(time > timeRequest)
-            return 0L;
-        
         long timePassed = TimeUnit.MILLISECONDS.toSeconds(time - timeRequest);
+        if(timePassed < 0L)
+            return 0L;
         
         return 15L - timePassed;
     }
