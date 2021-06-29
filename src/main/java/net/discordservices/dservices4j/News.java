@@ -41,7 +41,7 @@ public class News{
      * if you want to send an Error message.
      *
      * <h2>Rate Limits</h2>
-     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <p>By default will the Wrapper only perform one request per 15 seconds per endpoint.
      * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      *
      * @param title
@@ -57,7 +57,7 @@ public class News{
      * Posts news to the bot page.
      *
      * <h2>Rate Limits</h2>
-     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <p>By default will the Wrapper only perform one request per 15 seconds per endpoint.
      * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      * 
      * @param title

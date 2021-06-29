@@ -124,7 +124,7 @@ public class Commands{
      * Posts the previously set commands to the Discordservices API.
      * 
      * <h2>Rate Limits</h2>
-     * <p>By default will the Wrapper only perform one request per 5 Minutes per endpoint.
+     * <p>By default will the Wrapper only perform one request per 15 seconds per endpoint.
      * <br>If however, the Request either isn't successful or gets rate limited will those errors be logged in your terminal.
      * 
      * @throws java.lang.NullPointerException
