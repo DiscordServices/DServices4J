@@ -110,8 +110,8 @@ publishing {
 
             if(mavenUsername != null && mavenPassword != null) {
                 credentials {
-                    username = mavenUsername
-                    password = mavenPassword
+                    it.username(mavenUsername)
+                    it.password(mavenPassword)
                 }
             }
         }
@@ -123,7 +123,7 @@ class Version{
 
     static String getBuild(){
         System.getenv("BUILD_NUMBER") ? "_" + System.getenv("BUILD_NUMBER") :
-                System.getProperty("BUILD_NUMBER") ? "_" + System.getProperty("BUILD_NUMBER") : ""
+        System.getProperty("BUILD_NUMBER") ? "_" + System.getProperty("BUILD_NUMBER") : ""
     }
 
     String toString(){
